@@ -18,7 +18,11 @@ struct planet {
     double x;
     double y;
   } force;
-  friend std::ostream & operator<< (std::ostream & os, const planet & marte);
+
+  void print(void);
   void deltapos (double t);
+  void deltavel (double t);
+  void deltaforce (planet pluto);
+  planet operator= (planet venus);
   
 };
