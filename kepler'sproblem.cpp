@@ -27,10 +27,10 @@ int main(void)
   for(double time=0.0; time<=5 ; time+=deltaT){
     et.deltaforce(marte);
     marte.deltaforce(et);
-    marte.deltavel(time);
-    marte.deltapos(time);
-    et.deltavel (time);
-    et.deltapos (time);
+    marte.deltaveleuler(time);
+    marte.deltaposeuler(time);
+    et.deltaveleuler (time);
+    et.deltaposeuler (time);
     et.print();
     //marte.print();
   }
