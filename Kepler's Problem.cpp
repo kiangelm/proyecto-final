@@ -4,7 +4,7 @@
 
 int main(void)
 {
-  double deltaT = 0.0005;
+  double deltaT = 0.00005;
   
   planet et;
   et.mass=80;
@@ -24,19 +24,32 @@ int main(void)
   marte.force.x=0.0;
   marte.force.y=0.0;
 
-  for(double time=0.0; time<=2 ; time+=deltaT){
-    et.deltaforce(marte);
-
+  for(double time=0.0; time<=0.25 ; time+=deltaT){
+    
     //Comentadas las lineas para evitar al planeta "Marte moverse"
     //marte.deltaforce(et);
     //marte.deltavel(time);
     //marte.deltapos(time);
+    et.deltaforce(marte);
     et.deltavel (time);
     et.deltapos (time);
-    et.print();
-    marte.print();
+    //et.print();
+    //marte.print();
     std::cout << std::endl;
   }
+
+  et.mass=80;
+  et.pos.x=0.4;
+  et.pos.y=0.0;
+  et.vel.x=0.0;
+  et.vel.y=sqrt(1.6/0.4);
+  et.force.x=0.0;
+  et.force.y=0.0;
+  for(double time=0.0; time<=0.25 ; time+=deltaT){
+    et.deltaforce (marte);
+    et.deltaveleulerverlet (time, marte);
+    et.deltaposeulerverlet (time);
+    et.print();
+    marte.print();
+  }
 }
-
-
