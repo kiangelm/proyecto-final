@@ -23,10 +23,11 @@ struct planet {
   void deltapos (double t);
   void deltavel (double t);
   void deltaforce (planet pluto);
+
   void deltaveleulerverlet (double t, planet beta);
   void deltaposeulerverlet (double t);
   void deltaveleuler2 (double t);
   void deltaposeuler2 (double t);
-  planet operator= (planet venus);
-  
+  void operator= (planet venus);
+
 };

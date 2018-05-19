@@ -4,11 +4,11 @@ void planet::print (void)
 {
   std::cout << pos.x << "\t" << pos.y << "\t" 
 	    << vel.x << "\t" << vel.y << "\t"
-	    << force.x << "\t" << force.y << std::endl;
+	    << force.x << "\t" << force.y << "\t";
 
 }
 
-planet planet::operator= (planet venus)
+void planet::operator= (planet venus)
 {
   mass=venus.mass;
   pos.x=venus.pos.x;
