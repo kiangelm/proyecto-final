@@ -23,8 +23,9 @@ struct planet {
   void deltapos (double t);
   void deltavel (double t);
   void deltaforce (planet pluto);
-  void deltaveleulerverlet (double t, planet beta);
+  void deltaveleulerverlet (double t);
   void deltaposeulerverlet (double t);
+  void deltaveleulerverlet2 (double t);
   void deltaveleuler2 (double t);
   void deltaposeuler2 (double t);
   void operator= (planet venus);

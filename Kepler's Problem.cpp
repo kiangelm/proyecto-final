@@ -47,8 +47,9 @@ int main(void)
   et.force.y=0.0;
   for(double time=0.0; time<=0.25 ; time+=deltaT){
     et.deltaforce (marte);
-    et.deltaveleulerverlet (time, marte);
+    et.deltaveleulerverlet2 (time);
     et.deltaposeulerverlet (time);
+    et.deltaveleulerverlet (time)
     et.print();
     marte.print();
   }
