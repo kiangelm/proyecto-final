@@ -35,7 +35,7 @@ int main(void)
     et.deltapos (time);
     //et.print();
     //marte.print();
-    std::cout << std::endl;
+    //std::cout << std::endl;
   }
 
   et.mass=80;
@@ -52,5 +52,6 @@ int main(void)
     et.deltaveleulerverlet (time)
     et.print();
     marte.print();
+    std::cout << std::endl;
   }
 }
