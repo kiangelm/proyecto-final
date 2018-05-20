@@ -2,7 +2,7 @@
 
 void planet::print (void)
 {
-  std::cout << pos.x << "\t" << pos.y << "\t" 
+  std::cout << pos.x << "\t" << pos.y << "\t"
 	    << vel.x << "\t" << vel.y << "\t"
 	    << force.x << "\t" << force.y << "\t";
 
@@ -51,22 +51,20 @@ void planet::deltaveleuler2 (double t)
 void planet::deltaposeulerverlet (double t)
 {
 	pos.x=pos.x+t*this.deltaveleulerverlet2(t).vel.x;
-	pos.y=pos.y+t*this.deltaveleulerverlet2(t).vel.y;  
+	pos.y=pos.y+t*this.deltaveleulerverlet2(t).vel.y;
 }
  planet planet::deltaveleulerverlet2 (double t)
-{ 	
+{
 	planet aux =this;
 	aux.vel.x=vel.x+t/2.0*aux.force.x;
-	aux.vel.y=vel.y+t/2.0*aux.force.y; 
+	aux.vel.y=vel.y+t/2.0*aux.force.y;
 	return aux;
 }
 void planet::deltaveleulerverlet (double t)
-{ 	
+{
 	planet aux = this;
 	aux.deltaforce(t);
 	vel.x=this.deltaveleulerverlet2(t).vel.x+t/2.0*aux.force.x;
 	vel.y=this.deltaveleulerverlet2(t).vel.y+t/2.0*aux.force.y;
 
 }
-
-
