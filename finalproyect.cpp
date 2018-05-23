@@ -50,3 +50,10 @@ void planet::deltaposstromerverlet (double t)
   pos.x= 2*pos.x-posant.x+t*t*force.x;
   pos.y= 2*pos.y-posant.y+t*t*force.y;
 }
+void deltaposeuler2 (double t)
+{
+  planet aux=*this;
+  aux.deltaveleuler(t);
+  pos.x=pos.x+t*(vel.x+aux.vel.x)/2);
+  pos.y=pos.y+t*(vel.y+aux.vel.y)/2);
+}
