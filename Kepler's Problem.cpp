@@ -33,9 +33,9 @@ int main(void)
     et.deltaforce(marte);
     et.deltaveleuler (time);
     et.deltaposeuler (time);
-    //et.print();
+    et.print();
     //marte.print();
-    //std::cout << std::endl;
+    std::cout << std::endl;
   }
 
   et.mass=80;
@@ -45,13 +45,17 @@ int main(void)
   et.vel.y=sqrt(1.6/0.4);
   et.force.x=0.0;
   et.force.y=0.0;
-  for(double time=0.0; time<=0.25 ; time+=deltaT){
-    et.deltaforce (marte);
-    et.deltaveleulerverlet2 (time);
-    et.deltaposeulerverlet (time);
-    et.deltaveleulerverlet (time)
+for(double time=0.0; time<=0.25 ; time+=deltaT/10){
+
+    //Comentadas las lineas para evitar al planeta "Marte moverse"
+    //marte.deltaforce(et);
+    //marte.deltaveleuler(time);
+    //marte.deltaposeuler(time);
+    et.deltaforce(marte);
+    et.deltaveleuler (time);
+    et.deltaposeuler (time);
     et.print();
-    marte.print();
+    //marte.print();
     std::cout << std::endl;
   }
 }

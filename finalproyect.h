@@ -21,13 +21,19 @@ struct planet {
 
   void print(void);
   void deltaforce (planet pluto);
-  void deltaveleulerverlet (double t);
-  void deltaposeulerverlet (double t);
-  void deltaveleulerverlet2 (double t);
+  void deltavelstromerverlet (double t);
+  void deltaposstromerverlet (double t);
+  void deltavelstromerverlet2 (double t);
   void deltaveleuler2 (double t);
   void deltaposeuler2 (double t);
   void deltaveleuler (double t);
   void deltaposeuler (double t);
   void operator= (planet venus);
+  void initintegrationverlet (double t);
 
+  struct {
+    double x;
+    double y;
+  } posant;
+  
 };
