@@ -26,31 +26,31 @@ int main(void)
   planet alpha = et;
   planet beta = marte;
 //metodo de euler
-  for(double time=0.0; time<=0.05 ; time+=deltaT){
+  //for(double time=0.0; time<=0.1 ; time+=deltaT){
 
     //Comentadas las lineas para evitar al planeta "Marte moverse"
-    beta.deltaforce(et);
+    //beta.deltaforce(alpha);
+    //beta.deltaveleuler(time);
+    //beta.deltaposeuler(time);
+    //alpha.deltaforce(marte);
+    //alpha.deltaveleuler (time);
+    //alpha.deltaposeuler (time);
+    //alpha.print();
+    //beta.print();
+    std::cout << std::endl;
+  //}
+  alpha = et;
+  beta = marte;
+//metodo de euler implisito
+  for(double time=0.0; time<=0.5 ; time+=deltaT){
+
+    //Comentadas las lineas para evitar al planeta "Marte moverse"
+    beta.deltaforce(alpha);
     beta.deltaveleuler(time);
     beta.deltaposeuler(time);
     alpha.deltaforce(marte);
     alpha.deltaveleuler (time);
-    alpha.deltaposeuler (time);
-    alpha.print();
-    //beta.print();
-    std::cout << std::endl;
-  }
-  alpha = et;
-  beta = marte;
-//metodo de euler implisito
-for(double time=0.0; time<=0.25 ; time+=deltaT/10){
-
-    //Comentadas las lineas para evitar al planeta "Marte moverse"
-    //beta.deltaforce(et);
-    //beta.deltaveleuler(time);
-    //beta.deltaposeuler(time);
-    alpha.deltaforce(marte);
-    alpha.deltaveleuler (time);
-    alpha.deltaposeulernxt2  (time);
+    alpha.deltaposeulerant2  (time);
     alpha.deltaposeuler2  (time);
     alpha.print();
     //beta.print();
