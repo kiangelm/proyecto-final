@@ -23,39 +23,39 @@ int main(void)
   marte.vel.y=0.0;
   marte.force.x=0.0;
   marte.force.y=0.0;
-
-  for(double time=0.0; time<=0.25 ; time+=deltaT){
+  planet alpha = et;
+  planet beta = marte;
+//metodo de euler
+  for(double time=0.0; time<=0.05 ; time+=deltaT){
 
     //Comentadas las lineas para evitar al planeta "Marte moverse"
-    //marte.deltaforce(et);
-    //marte.deltaveleuler(time);
-    //marte.deltaposeuler(time);
-    et.deltaforce(marte);
-    et.deltaveleuler (time);
-    et.deltaposeuler (time);
-    et.print();
-    //marte.print();
+    beta.deltaforce(et);
+    beta.deltaveleuler(time);
+    beta.deltaposeuler(time);
+    alpha.deltaforce(marte);
+    alpha.deltaveleuler (time);
+    alpha.deltaposeuler (time);
+    alpha.print();
+    //beta.print();
     std::cout << std::endl;
   }
-
-  et.mass=80;
-  et.pos.x=0.4;
-  et.pos.y=0.0;
-  et.vel.x=0.0;
-  et.vel.y=sqrt(1.6/0.4);
-  et.force.x=0.0;
-  et.force.y=0.0;
+  alpha = et;
+  beta = marte;
+//metodo de euler implisito
 for(double time=0.0; time<=0.25 ; time+=deltaT/10){
 
     //Comentadas las lineas para evitar al planeta "Marte moverse"
-    //marte.deltaforce(et);
-    //marte.deltaveleuler(time);
-    //marte.deltaposeuler(time);
-    et.deltaforce(marte);
-    et.deltaveleuler (time);
-    et.deltaposeuler (time);
-    et.print();
-    //marte.print();
+    //beta.deltaforce(et);
+    //beta.deltaveleuler(time);
+    //beta.deltaposeuler(time);
+    alpha.deltaforce(marte);
+    alpha.deltaveleuler (time);
+    alpha.deltaposeulernxt2  (time);
+    alpha.deltaposeuler2  (time);
+    alpha.print();
+    //beta.print();
     std::cout << std::endl;
   }
+//metodo storm velvet
+
 }
