@@ -50,10 +50,13 @@ void planet::deltaposstromerverlet (double t)
   pos.x= 2*pos.x-posant.x+t*t*force.x;
   pos.y= 2*pos.y-posant.y+t*t*force.y;
 }
-void deltaposeuler2 (double t)
+void planet::deltaposeulerant2 (double t)
 {
-  planet aux=*this;
-  aux.deltaveleuler(t);
-  pos.x=pos.x+t*(vel.x+aux.vel.x)/2);
-  pos.y=pos.y+t*(vel.y+aux.vel.y)/2);
+ velant.x= vel.x+ force.x/mass*t;
+ velant.y= vel.y+ force.y/mass*t;
+}
+void planet::deltaposeuler2 (double t)
+{
+  pos.x=pos.x+t*(vel.x+velant.x)/2;
+  pos.y=pos.y+t*(vel.y+velant.y)/2;
 }

@@ -24,6 +24,7 @@ struct planet {
   void deltavelstromerverlet (double t);
   void deltaposstromerverlet (double t);
   void deltavelstromerverlet2 (double t);
+  void deltaposeulerant2 (double t);
   void deltaposeuler2 (double t);
   void deltaveleuler (double t);
   void deltaposeuler (double t);
@@ -34,5 +35,9 @@ struct planet {
     double x;
     double y;
   } posant;
+  struct {
+    double x;
+    double y;
+  } velant;
 
 };
