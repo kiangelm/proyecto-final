@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include<vector>
 
 struct planet {
   double mass;
@@ -30,7 +31,7 @@ struct planet {
   void deltaposeuler (double t);
   void operator= (planet venus);
   void initintegrationverlet (double t);
-  void laplacerunge(void);
+  std::vector<double> laplacerunge(void);
 
   struct {
     double x;
