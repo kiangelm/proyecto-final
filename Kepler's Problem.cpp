@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "finalproyect.h"
+#include<fstream>
 
 int main(void)
 {
@@ -58,6 +59,7 @@ int main(void)
     //std::cout << std::endl;
   //}
 //metodo storm velvet
+   std::ofstream fout("laplacerunge.txt");
 for(double time=0.0; time<=0.5 ; time+=deltaT){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
@@ -67,5 +69,8 @@ for(double time=0.0; time<=0.5 ; time+=deltaT){
   alpha.deltaposstromerverlet (time);
   alpha.print();
   //beta.print();
+  fout<<alpha.laplacerunge()[0]<<" "<<alpha.laplacerunge()[1]<<" \n";
+  
+  
 }
 }
