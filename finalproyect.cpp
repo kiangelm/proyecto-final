@@ -60,3 +60,10 @@ void planet::deltaposeuler2 (double t)
   pos.x=pos.x+t*(vel.x+velant.x)/2;
   pos.y=pos.y+t*(vel.y+velant.y)/2;
 }
+void  planet::laplacerunge(planet tierra)
+{
+  double A0=vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+  double A1=vel.x*(pos.y*vel.x-pos.x*vel.y)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+}
+
+  
