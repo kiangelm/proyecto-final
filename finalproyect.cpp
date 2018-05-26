@@ -62,10 +62,7 @@ void planet::deltaposeuler2 (double t)
 }
 std::vector<double> planet::laplacerunge(void)
 {std::vector<double> a(2);
-  a[0]=vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
-  a[1]=vel.x*(pos.y*vel.x-pos.x*vel.y)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+  a[0]=mass*mass*vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+  a[1]=mass*mass*vel.x*(pos.x*vel.y-pos.y*vel.x)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
   return a;
-  
 }
-
-  

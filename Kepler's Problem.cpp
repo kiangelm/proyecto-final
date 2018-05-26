@@ -70,7 +70,7 @@ for(double time=0.0; time<=0.5 ; time+=deltaT){
   alpha.print();
   //beta.print();
   fout<<alpha.laplacerunge()[0]<<" "<<alpha.laplacerunge()[1]<<" \n";
-  
-  
+
+
 }
 }
