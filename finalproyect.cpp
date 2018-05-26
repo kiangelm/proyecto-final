@@ -1,5 +1,5 @@
 #include "finalproyect.h"
-
+#include<fstream>
 void planet::print (void)
 {
   std::cout << pos.x << "\t" << pos.y << "\t"
@@ -60,10 +60,10 @@ void planet::deltaposeuler2 (double t)
   pos.x=pos.x+t*(vel.x+velant.x)/2;
   pos.y=pos.y+t*(vel.y+velant.y)/2;
 }
-void  planet::laplacerunge(void)
-{
-  double A0=vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+std::vector<double> planet::laplacerunge(void)
+{ double A0=vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
   double A1=vel.x*(pos.y*vel.x-pos.x*vel.y)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+  std::cout<<A0<<" "<<A1<<"\n";
 }
 
   
