@@ -1,22 +1,26 @@
 #include "finalproyect.h"
-#include<fstream>
+#include <fstream>
 void planet::print (void)
 {
-  std::cout << pos.x << "\t" << pos.y << "\t"
-	    << vel.x << "\t" << vel.y << "\t"
-	    << force.x << "\t" << force.y << "\t";
+  std::cout << T << "\t"<< pos.x << "\t" << pos.y << "\t"
+	    << H << "\t" << L << "\t"
+	    << A.x << "\t" << A.y << "\t";
 
 }
 
 void planet::operator= (planet venus)
 {
   mass=venus.mass;
+  T=venus.T;
+  H=venus.H;
+  L=venus.L;
   pos.x=venus.pos.x;
   pos.y=venus.pos.y;
   vel.x=venus.vel.x;
   vel.y=venus.vel.y;
   force.x=venus.force.x;
   force.y=venus.force.y;
+
 }
 
 void planet::deltaposeuler (double t)
@@ -60,9 +64,16 @@ void planet::deltaposeuler2 (double t)
   pos.x=pos.x+t*(vel.x+velant.x)/2;
   pos.y=pos.y+t*(vel.y+velant.y)/2;
 }
-std::vector<double> planet::laplacerunge(void)
-{std::vector<double> a(2);
-  a[0]=mass*mass*vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
-  a[1]=mass*mass*vel.x*(pos.x*vel.y-pos.y*vel.x)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
-  return a;
+void planet::energy()
+{
+  H=mass*mass*(vel.x*vel.x+vel.y*vel.y)/2-1/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+}
+void planet::momentum()
+{
+  L=mass*(pos.x*vel.y-pos.y*vel.x);
+}
+void planet::invariant ()
+{
+  A.x=mass*mass*vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
+  A.y=mass*mass*vel.x*(pos.x*vel.y-pos.y*vel.x)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
 }

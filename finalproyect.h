@@ -1,9 +1,13 @@
 #include <iostream>
 #include <cmath>
-#include<vector>
+#include <vector>
+#include <string>
 
 struct planet {
   double mass;
+  double T;
+  double H;
+  double L;
 
   struct {
     double x;
@@ -20,6 +24,20 @@ struct planet {
     double y;
   } force;
 
+  struct {
+    double x;
+    double y;
+  } A;
+  //auxiliares
+  struct {
+      double x;
+      double y;
+    } posant;
+  struct {
+      double x;
+      double y;
+    } velant;
+
   void print(void);
   void deltaforce (planet pluto);
   void deltavelstromerverlet (double t);
@@ -29,17 +47,9 @@ struct planet {
   void deltaposeuler2 (double t);
   void deltaveleuler (double t);
   void deltaposeuler (double t);
+  void energy();
+  void momentum();
+  void invariant ();
   void operator= (planet venus);
   void initintegrationverlet (double t);
-  std::vector<double> laplacerunge(void);
-
-  struct {
-    double x;
-    double y;
-  } posant;
-  struct {
-    double x;
-    double y;
-  } velant;
-
 };
