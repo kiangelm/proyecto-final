@@ -113,4 +113,10 @@ struct planet {
   double energy();
   double momentum();
   void invariant ();
+
+/*
+Condiciones iniciales
+*/
+
+void initialconditions(planet &b);
 };
