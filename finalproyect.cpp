@@ -139,3 +139,24 @@ void planet::invariant ()
   A.x=mass*mass*vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
   A.y=mass*mass*vel.x*(pos.x*vel.y-pos.y*vel.x)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
 }
+
+void planet::initialconditions( planet &b)
+{
+  mass=80;
+  pos.x=0.4;
+  pos.y=0;
+  vel.x=0;
+  vel.y=sqrt(1.6/0.4);
+  force.x=0;
+  force.y=0;
+  
+  b.mass=90000000;
+  b.pos.x=0;
+  b.pos.y=0;
+  b.vel.x=0;
+  b.vel.y=0;
+  b.force.x=0;
+  b.force.y=0;
+}
+
+       
