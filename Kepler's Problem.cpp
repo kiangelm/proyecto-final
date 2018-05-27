@@ -13,20 +13,14 @@ int main (void)
 {
   double deltaT = 0.00005;
 
-  /**
-   * Condiciones iniciales
-   */
-  //            masa  pos_x  pos_y  vel_x  vel_y          force_x  force_y
-  planet Phobos(80,   0.4,   0.0,   0.0,   sqrt(1.6/0.4), 0.0,     0.0);
+  /*initial conditions */
 
-  planet Marte (9000, 0.0,   0.0,   0.0,   0.0,           0.0,     0.0);
-
-  planet alpha,beta;
-
-
-
-  /**
-   * Abrir todos los archivos de datos
+  planet alpha;
+  planet beta;
+  alpha.initialconditions(beta);
+  
+       
+  /* Abrir todos los archivos de datos
    */
   for (int i = 0; i < 3; i++)
     {
@@ -38,9 +32,6 @@ int main (void)
   /**
    * Euler
    */
-  alpha = Phobos;
-  beta = Marte;
-
   for(double time=0.0 ; time<=0.1 ; time+=deltaT) {
     alpha.deltaforce(beta);
     alpha.euler_deltavel(time);
@@ -54,9 +45,7 @@ int main (void)
   /**
    * Euler 2
    */
-  alpha = Phobos;
-  beta = Marte;
-
+  alpha.initialconditions(beta);
   for(double time=0.0 ; time<=0.5 ; time+=deltaT) {
     alpha.euler2_deltaposant(time);
     alpha.deltaforce(beta);
@@ -72,9 +61,7 @@ int main (void)
   /**
    * Metodo Stromer-Verlet
    */
-  alpha = Phobos;
-  beta = Marte;
-  
+  alpha.initialconditions(beta);
   for(double time=0.0 ; time<=0.5 ; time+=deltaT) {
     alpha.verlet_initintegration(time);
     alpha.deltaforce(beta);
