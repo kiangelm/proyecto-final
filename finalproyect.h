@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cmath>
-#include <vector>
-#include <string>
 
 struct planet {
+  /**
+   * Definidas las propiedades del planeta
+   */
   double mass;
-  double T;
   double H;
   double L;
 
@@ -28,28 +28,89 @@ struct planet {
     double x;
     double y;
   } A;
-  //auxiliares
+  
+  /**
+   * Auxiliares
+   */
   struct {
-      double x;
-      double y;
-    } posant;
+    double x;
+    double y;
+  } posant;
+  
   struct {
-      double x;
-      double y;
-    } velant;
+    double x;
+    double y;
+  } velant;
 
+  
+
+
+  
+  /**
+   * Subrutinas  para el  manejo e  interaccion de
+   * los planetas.
+   */
+
+  /**
+   * Constructores
+   */
+  planet();
+  planet(const double Mass,
+	 const double pos_x,
+	 const double pos_y,
+	 const double vel_x,
+	 const double vel_y,
+	 const double force_x,
+	 const double force_y);
+  
+  /**
+   * Impresión
+   */
   void print(void);
-  void deltaforce (planet pluto);
-  void deltavelstromerverlet (double t);
-  void deltaposstromerverlet (double t);
-  void deltavelstromerverlet2 (double t);
-  void deltaposeulerant2 (double t);
-  void deltaposeuler2 (double t);
-  void deltaveleuler (double t);
-  void deltaposeuler (double t);
-  void energy();
-  void momentum();
-  void invariant ();
+  friend std::ostream & operator<<(std::ostream & os, const planet & Planet);
+
+  /**
+   * Operadores
+   */
   void operator= (planet venus);
-  void initintegrationverlet (double t);
+
+
+  
+  /**
+   * Interacciones entre planetas
+   */
+  
+  /**
+   * Cambio de fuerza
+   */
+  void deltaforce(planet pluto);
+
+  /**
+   * Euler
+   */
+  void euler_deltapos(double t);
+  void euler_deltavel(double t);
+
+  /**
+   * Stromer-Verlet
+   */
+  void verlet_initintegration(double t);
+  void verlet_deltavel(double t);
+  void verlet_deltapos(double t);
+
+  /**
+   * Euler 2
+   */
+  void euler2_deltaposant(double t);
+  void euler2_deltapos(double t);
+
+
+
+
+  /**
+   * Invariantes
+   */
+  double energy();
+  double momentum();
+  void invariant ();
 };
