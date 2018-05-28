@@ -48,20 +48,19 @@ int main(void)
     }
   alpha = et;
   beta = marte;
+
 //metodo de euler implicito
   for(double time=0.0; time<=10 ; time+=deltaT){
 
     //Comentadas las lineas para evitar al planeta "Marte moverse"
     planet tau=alpha;
     tau.deltaforce(beta);
-    tau.deltaveleuler(deltaT);
-    tau.deltaposeuler(deltaT);
-    beta.midpoint(tau);//Procedimiento anterior con tau realizado para encontrar el punto siguente
-    alpha.deltaforce(alpha);
-    alpha.deltaveleuler(deltaT);
+    alpha.deltaforce(beta);
+    tau.velmidpoint(deltaT,alpha);//Procedimiento  realizado para encontrar la velocidad media
     alpha.deltaposeuler(deltaT);
-    alpha.T=time;
+    //    alpha.deltaveleuler2(deltaT,tau);
     alpha.invariant();
+    alpha.T=time;
     outputFile[1] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
                   << "\t" << alpha.H << "\t" << alpha.L << "\t"
                   << alpha.A.x << "\t" << alpha.A.y << "\n";;
@@ -82,3 +81,4 @@ for(double time=0.0; time<=10 ; time+=h){
   
 }
 }
+  
