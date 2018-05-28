@@ -40,9 +40,8 @@ struct planet {
 
   void print(void);
   void deltaforce (planet pluto);
-  void deltavelstromerverlet (double t);
   void deltaposstromerverlet (double t);
-  void deltavelstromerverlet2 (double t);
+  void deltavelstromerverlet (double t);
   void deltaveleuler (double t);
   void deltaposeuler (double t);
   void midpoint(planet tau);
