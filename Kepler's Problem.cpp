@@ -39,11 +39,11 @@ int main(void)
 
     //Comentadas las lineas para evitar al planeta "Marte moverse"
     beta.deltaforce(alpha);
-    beta.deltaveleuler(time);
-    beta.deltaposeuler(time);
+    beta.deltaveleuler(deltaT);
+    beta.deltaposeuler(deltaT);
     alpha.deltaforce(beta);
-    alpha.deltaveleuler (time);
-    alpha.deltaposeuler (time);
+    alpha.deltaveleuler (deltaT);
+    alpha.deltaposeuler (deltaT);
     alpha.invariant();
     beta.invariant();
     alpha.T=time;
@@ -63,12 +63,12 @@ int main(void)
     //Comentadas las lineas para evitar al planeta "Marte moverse"
     planet tau=beta;
     beta.deltaforce(alpha);
-    beta.deltaveleuler(time);
-    beta.deltaposeuler(time);
+    beta.deltaveleuler(deltaT);
+    beta.deltaposeuler(deltaT);
     beta.midpoint(tau);
     alpha.deltaforce(beta);
-    alpha.deltaveleuler(time);
-    alpha.deltaposeuler(time);
+    alpha.deltaveleuler(deltaT);
+    alpha.deltaposeuler(deltaT);
     alpha.invariant();
     beta.invariant();
     alpha.T=time;
@@ -85,10 +85,10 @@ for(double time=0.0; time<=0.5 ; time+=deltaT){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
   beta.deltaforce(alpha);
-  beta.initintegrationverlet(time);
-  beta.deltaposstromerverlet(time);
+  beta.initintegrationverlet(deltaT);
+  beta.deltaposstromerverlet(deltaT);
   beta.deltaforce(alpha);
- beta.deltavelstromerverlet(time);
+ beta.deltavelstromerverlet(deltaT);
   //alpha.deltaforce(beta);
   //alpha.deltaposstromerverlet (t);
   //alpha.print();
