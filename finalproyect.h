@@ -44,7 +44,8 @@ struct planet {
   void deltavelstromerverlet (double t);
   void deltaveleuler (double t);
   void deltaposeuler (double t);
-  void midpoint(planet tau);
+  void velmidpoint(double t,planet &a);
+  void deltaveleuler2(double t, const planet &a);
   void invariant ();
   void operator= (planet venus);
   void initintegrationverlet (double t);
