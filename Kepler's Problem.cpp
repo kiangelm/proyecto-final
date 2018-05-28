@@ -85,9 +85,12 @@ for(double time=0.0; time<=0.5 ; time+=deltaT){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
   beta.deltaforce(alpha);
+  beta.initintegrationverlet(time);
   beta.deltaposstromerverlet(time);
-  alpha.deltaforce(beta);
-  alpha.deltaposstromerverlet (time);
+  beta.deltaforce(alpha);
+ beta.deltavelstromerverlet(time);
+  //alpha.deltaforce(beta);
+  //alpha.deltaposstromerverlet (t);
   //alpha.print();
   //beta.print();
 }
