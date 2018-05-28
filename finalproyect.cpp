@@ -54,15 +54,11 @@ void planet::deltaposstromerverlet (double t)
   pos.x= 2*pos.x-posant.x+t*t*force.x;
   pos.y= 2*pos.y-posant.y+t*t*force.y;
 }
-void planet::deltaposeulerant2 (double t)
+  
+void planet::midpoint (planet tau)
 {
- velant.x= vel.x- force.x/mass*t;
- velant.y= vel.y- force.y/mass*t;
-}
-void planet::deltaposeuler2 (double t)
-{
-  pos.x=pos.x+t*(vel.x+velant.x)/2;
-  pos.y=pos.y+t*(vel.y+velant.y)/2;
+  pos.x=(tau.pos.x+pos.x)/2;
+  pos.y=(tau.pos.y+pos.y)/2;
 }
 void planet::invariant ()
 {
