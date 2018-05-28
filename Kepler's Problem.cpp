@@ -57,18 +57,18 @@ int main(void)
     }
   alpha = et;
   beta = marte;
-//metodo de euler implisito
+//metodo de euler implicito
   for(double time=0.0; time<=0.5 ; time+=deltaT){
 
     //Comentadas las lineas para evitar al planeta "Marte moverse"
+    planet tau=beta;
     beta.deltaforce(alpha);
     beta.deltaveleuler(time);
-    alpha.deltaposeulerant2  (time);
-    beta.deltaposeuler2(time);
+    beta.deltaposeuler(time);
+    beta.midpoint(tau);
     alpha.deltaforce(beta);
     alpha.deltaveleuler(time);
-    alpha.deltaposeulerant2  (time);
-    alpha.deltaposeuler2  (time);
+    alpha.deltaposeuler(time);
     alpha.invariant();
     beta.invariant();
     alpha.T=time;
