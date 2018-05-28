@@ -1,79 +1,94 @@
 #include <iostream>
 #include <cmath>
-#include <fstream>
 #include "finalproyect.h"
+#include <fstream>
+#include <string>
 
-const char * filename[] = {"Euler.dat",
-			   "Implicit.dat",
-			   "Verlet.dat"};
-
-std::ofstream outputFile[3];
-
-int main (void)
+int main(void)
 {
   double deltaT = 0.00005;
 
-  /*initial conditions */
+  planet et;
+  et.mass=80;
+  et.pos.x=0.4;
+  et.pos.y=0.0;
+  et.vel.x=0.0;
+  et.vel.y=sqrt(1.6/0.4);
+  et.force.x=0.0;
+  et.force.y=0.0;
 
-  planet alpha;
-  planet beta;
-  alpha.initialconditions(beta);
-  
-       
-  /* Abrir todos los archivos de datos
-   */
-  for (int i = 0; i < 3; i++)
-    {
-      outputFile[i].open(filename[i]);
+  planet marte;
+  marte.mass=9000;
+  marte.pos.x=0.0;
+  marte.pos.y=0.0;
+  marte.vel.x=0.0;
+  marte.vel.y=0.0;
+  marte.force.x=0.0;
+  marte.force.y=0.0;
+  planet alpha = et;
+  planet beta = marte;
+  //ofstream objects
+  std::string filename[6] = {"Euleralpha.txt", "Eulerbeta.txt", "Implisitalpha.txt", "Implisitbeta.txt", "Velvetalpha.txt", "Velverbeta.txt"};
+	std::ofstream outputFile[6];
+	for (int i = 0; i < 6; i++)
+	{
+		outputFile[i].open(filename[i].c_str());
+	}
+//metodo de euler
+  for(double time=0.0; time<=0.1 ; time+=deltaT){
+
+    //Comentadas las lineas para evitar al planeta "Marte moverse"
+    beta.deltaforce(alpha);
+    beta.deltaveleuler(time);
+    beta.deltaposeuler(time);
+    alpha.deltaforce(beta);
+    alpha.deltaveleuler (time);
+    alpha.deltaposeuler (time);
+    alpha.invariant();
+    beta.invariant();
+    alpha.T=time;
+    beta.T=time;
+    outputFile[0] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
+                  << "\t" << alpha.H << "\t" << alpha.L << "\t"
+                	<< beta.A.x << "\t" << beta.A.y << "\n";;
+    outputFile[1] << beta.T << "\t"<< beta.pos.x << "\t" << beta.pos.y
+                  << "\t" << beta.H << "\t" << beta.L << "\t"
+                	<< beta.A.x << "\t" << beta.A.y << "\n";
     }
+  alpha = et;
+  beta = marte;
+//metodo de euler implisito
+  for(double time=0.0; time<=0.5 ; time+=deltaT){
 
-
-
-  /**
-   * Euler
-   */
-  for(double time=0.0 ; time<=0.1 ; time+=deltaT) {
+    //Comentadas las lineas para evitar al planeta "Marte moverse"
+    beta.deltaforce(alpha);
+    beta.deltaveleuler(time);
+    alpha.deltaposeulerant2  (time);
+    beta.deltaposeuler2(time);
     alpha.deltaforce(beta);
-    alpha.euler_deltavel(time);
-    alpha.euler_deltapos(time);
-
-    outputFile[0] << time << "\t" << alpha << "\n";
+    alpha.deltaveleuler(time);
+    alpha.deltaposeulerant2  (time);
+    alpha.deltaposeuler2  (time);
+    alpha.invariant();
+    beta.invariant();
+    alpha.T=time;
+    beta.T=time;
+    outputFile[2] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
+                  << "\t" << alpha.H << "\t" << alpha.L << "\t"
+                  << beta.A.x << "\t" << beta.A.y << "\n";;
+    outputFile[3] << beta.T << "\t"<< beta.pos.x << "\t" << beta.pos.y
+                  << "\t" << beta.H << "\t" << beta.L << "\t"
+                  << beta.A.x << "\t" << beta.A.y << "\n";
   }
+//metodo storm velvet
+for(double time=0.0; time<=0.5 ; time+=deltaT){
 
-
-
-  /**
-   * Euler 2
-   */
-  alpha.initialconditions(beta);
-  for(double time=0.0 ; time<=0.5 ; time+=deltaT) {
-    alpha.euler2_deltaposant(time);
-    alpha.deltaforce(beta);
-    alpha.euler_deltavel(time);
-    alpha.euler2_deltaposant(time);
-    alpha.euler2_deltapos(time);
-
-    //alpha.print();
-    //beta.print();
-    outputFile[1] << time << "\t" << alpha << "\n";
-  }
-
-  /**
-   * Metodo Stromer-Verlet
-   */
-  alpha.initialconditions(beta);
-  for(double time=0.0 ; time<=0.5 ; time+=deltaT) {
-    alpha.verlet_initintegration(time);
-    alpha.deltaforce(beta);
-    alpha.verlet_deltapos(time);
-
-    //alpha.print();
-    //beta.print();
-    outputFile[2] << time << "\t" << alpha << "\n";
-  }
-
-  for (int i = 0; i < 3; i++)
-    {
-      outputFile[i].close();
-    }
+  //Comentadas las lineas para evitar al planeta "Marte moverse"
+  beta.deltaforce(alpha);
+  beta.deltaposstromerverlet(time);
+  alpha.deltaforce(beta);
+  alpha.deltaposstromerverlet (time);
+  //alpha.print();
+  //beta.print();
+}
 }
