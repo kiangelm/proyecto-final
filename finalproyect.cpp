@@ -57,14 +57,19 @@ void planet::deltaposstromerverlet (double t)
 }
 void planet::deltavelstromerverlet(double t)
 {
-  vel.x=velant.x+t*force.x/2;
-  vel.y=velant.y+t*force.y/2;
+  vel.x=velant.x+t*force.x/2*mass;
+  vel.y=velant.y+t*force.y/2*mass;
 }
-  
-void planet::midpoint (planet tau)
+void planet::deltaveleuler2(double t,const planet &a)
+{vel.x=0;
+  vel.y=0;
+  vel.x=a.vel.x+t*force.x/mass;
+  vel.y=a.vel.x+t*force.x/mass;
+}
+void planet::velmidpoint (double t,planet &a)
 {
-  pos.x=(tau.pos.x+pos.x)/2;
-  pos.y=(tau.pos.y+pos.y)/2;
+ a.vel.x=vel.x+t*force.x/2*mass;
+ a.vel.y=vel.x+t*force.y/2*mass;
 }
 void planet::invariant ()
 {
@@ -73,3 +78,4 @@ void planet::invariant ()
   A.x=mass*mass*vel.y*(pos.x*vel.y-pos.y*vel.x)-pos.x/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
   A.y=mass*mass*vel.x*(pos.x*vel.y-pos.y*vel.x)-pos.y/(sqrt((pos.x*pos.x)+(pos.y*pos.y)));
 }
+
