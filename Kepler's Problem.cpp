@@ -6,8 +6,8 @@
 
 int main(void)
 {
-  double deltaT = 0.00005;
-
+  double deltaT = 0.0005;
+  double h=0.005;
   planet et;
   et.mass=80;
   et.pos.x=0.4;
@@ -28,70 +28,57 @@ int main(void)
   planet alpha = et;
   planet beta = marte;
   //ofstream objects
-  std::string filename[6] = {"Euleralpha.txt", "Eulerbeta.txt", "Implisitalpha.txt", "Implisitbeta.txt", "Velvetalpha.txt", "Velverbeta.txt"};
-	std::ofstream outputFile[6];
-	for (int i = 0; i < 6; i++)
+  std::string filename[3] = { "Eulerbeta.txt","Implisitbeta.txt","Velverbeta.txt"};
+	std::ofstream outputFile[3];
+	for (int i = 0; i < 3; i++)
 	{
 		outputFile[i].open(filename[i].c_str());
 	}
 //metodo de euler
-  for(double time=0.0; time<=0.1 ; time+=deltaT){
+  for(double time=0.0; time<=10 ; time+=deltaT){
 
-    //Comentadas las lineas para evitar al planeta "Marte moverse"
-    beta.deltaforce(alpha);
-    beta.deltaveleuler(deltaT);
-    beta.deltaposeuler(deltaT);
     alpha.deltaforce(beta);
     alpha.deltaveleuler (deltaT);
     alpha.deltaposeuler (deltaT);
     alpha.invariant();
-    beta.invariant();
     alpha.T=time;
-    beta.T=time;
     outputFile[0] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
                   << "\t" << alpha.H << "\t" << alpha.L << "\t"
-                	<< beta.A.x << "\t" << beta.A.y << "\n";;
-    outputFile[1] << beta.T << "\t"<< beta.pos.x << "\t" << beta.pos.y
-                  << "\t" << beta.H << "\t" << beta.L << "\t"
-                	<< beta.A.x << "\t" << beta.A.y << "\n";
+                	<< alpha.A.x << "\t" << alpha.A.y << "\n";;
     }
   alpha = et;
   beta = marte;
 //metodo de euler implicito
-  for(double time=0.0; time<=0.5 ; time+=deltaT){
+  for(double time=0.0; time<=10 ; time+=deltaT){
 
     //Comentadas las lineas para evitar al planeta "Marte moverse"
-    planet tau=beta;
-    beta.deltaforce(alpha);
-    beta.deltaveleuler(deltaT);
-    beta.deltaposeuler(deltaT);
-    beta.midpoint(tau);
-    alpha.deltaforce(beta);
+    planet tau=alpha;
+    tau.deltaforce(beta);
+    tau.deltaveleuler(deltaT);
+    tau.deltaposeuler(deltaT);
+    beta.midpoint(tau);//Procedimiento anterior con tau realizado para encontrar el punto siguente
+    alpha.deltaforce(alpha);
     alpha.deltaveleuler(deltaT);
     alpha.deltaposeuler(deltaT);
-    alpha.invariant();
-    beta.invariant();
     alpha.T=time;
-    beta.T=time;
-    outputFile[2] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
+    alpha.invariant();
+    outputFile[1] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
                   << "\t" << alpha.H << "\t" << alpha.L << "\t"
-                  << beta.A.x << "\t" << beta.A.y << "\n";;
-    outputFile[3] << beta.T << "\t"<< beta.pos.x << "\t" << beta.pos.y
-                  << "\t" << beta.H << "\t" << beta.L << "\t"
-                  << beta.A.x << "\t" << beta.A.y << "\n";
+                  << alpha.A.x << "\t" << alpha.A.y << "\n";;
   }
 //metodo storm velvet
-for(double time=0.0; time<=0.5 ; time+=deltaT){
+for(double time=0.0; time<=10 ; time+=h){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
-  beta.deltaforce(alpha);
-  beta.initintegrationverlet(deltaT);
-  beta.deltaposstromerverlet(deltaT);
-  beta.deltaforce(alpha);
- beta.deltavelstromerverlet(deltaT);
-  //alpha.deltaforce(beta);
-  //alpha.deltaposstromerverlet (t);
-  //alpha.print();
-  //beta.print();
+  alpha.deltaforce(beta);
+  alpha.initintegrationverlet(h);
+  alpha.deltaposstromerverlet(h);
+  alpha.deltaforce(beta);
+  alpha.deltavelstromerverlet(h);
+  alpha.invariant();
+   outputFile[2] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
+                  << "\t" << alpha.H << "\t" << alpha.L << "\t"
+                  << alpha.A.x << "\t" << alpha.A.y << "\n";;
+  
 }
 }
