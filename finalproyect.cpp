@@ -45,14 +45,20 @@ void planet::deltaforce (planet pluto)
 
 void planet::initintegrationverlet (double t)
 {
-  posant.x= pos.x-vel.x*t+t*t*force.x/2*mass ;
-  posant.y= pos.y-vel.y*t+t*t*force.y/2*mass ;
+  velant.x= vel.x+t*force.x/2*mass ;
+  velant.y=vel.y+t*force.y/2*mass ;
+
 }
 
 void planet::deltaposstromerverlet (double t)
 {
-  pos.x= 2*pos.x-posant.x+t*t*force.x;
-  pos.y= 2*pos.y-posant.y+t*t*force.y;
+  pos.x= pos.x+velant.x*t;
+  pos.y=pos.y+velant.y*t;
+}
+void planet::deltavelstromerverlet(double t)
+{
+  vel.x=velant.x+t*force.x/2;
+  vel.y=velant.y+t*force.y/2;
 }
   
 void planet::midpoint (planet tau)
