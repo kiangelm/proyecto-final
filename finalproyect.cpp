@@ -20,7 +20,10 @@ void planet::operator= (planet venus)
   vel.y=venus.vel.y;
   force.x=venus.force.x;
   force.y=venus.force.y;
-
+  velant.x=venus.velant.x;
+  velant.y=venus.velant.y;
+  posant.x=venus.posant.x;
+  posant.y=venus.posant.y;
 }
 
 void planet::deltaposeuler (double t)
@@ -44,10 +47,10 @@ void planet::deltaforce (planet pluto)
 }
 
 void planet::initintegrationverlet (double t)
-{
-  velant.x= vel.x+t*force.x/2*mass ;
-  velant.y=vel.y+t*force.y/2*mass ;
-
+{velant.x=0;
+  velant.y=0;
+  velant.x= vel.x+t*force.x/(2*mass) ;
+  velant.y=vel.y+t*force.y/(2*mass);
 }
 
 void planet::deltaposstromerverlet (double t)
@@ -57,19 +60,20 @@ void planet::deltaposstromerverlet (double t)
 }
 void planet::deltavelstromerverlet(double t)
 {
-  vel.x=velant.x+t*force.x/2*mass;
-  vel.y=velant.y+t*force.y/2*mass;
+  vel.x=velant.x+t*force.x/(2*mass);
+  vel.y=velant.y+t*force.y/(2*mass);
 }
-void planet::deltaveleuler2(double t,const planet &a)
-{vel.x=0;
-  vel.y=0;
-  vel.x=a.vel.x+t*force.x/mass;
-  vel.y=a.vel.x+t*force.x/mass;
+void planet::deltaposeuler2(double t, const planet &a)
+{pos.x=posant.x+t*(vel.x+t*force.x/(mass));
+  pos.y=posant.y+t*(vel.y+t*force.x/(mass));
+  vel.x=a.vel.x;
+  vel.y=a.vel.y;
 }
-void planet::velmidpoint (double t,planet &a)
-{
- a.vel.x=vel.x+t*force.x/2*mass;
- a.vel.y=vel.x+t*force.y/2*mass;
+void planet::midpoint (double t,planet &a)
+{a.posant.x=pos.x;
+  a.posant.y=pos.y;
+  a.pos.x=(pos.x+a.pos.x)/2;
+  a.pos.y=(pos.y+a.pos.y)/2;
 }
 void planet::invariant ()
 {
