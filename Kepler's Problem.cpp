@@ -51,15 +51,12 @@ int main(void)
 
 //metodo de euler implicito
   for(double time=0.0; time<=10 ; time+=deltaT){
-
-    //Comentadas las lineas para evitar al planeta "Marte moverse
-    planet tau=alpha;
-    tau.deltaforce(beta);
-    tau.deltaveleuler(deltaT);
-    tau.deltaposeuler(deltaT);
-    alpha.midpoint(deltaT,tau);
     alpha.deltaforce(beta);
-    alpha.deltaposeuler2(deltaT,tau);
+    alpha.velmidpoint(deltaT);
+    alpha.deltaposeuler2(deltaT);
+    alpha.deltaveleuler(deltaT);
+    
+    //Comentadas las lineas para evitar al planeta "Marte moverse
     
     
     //    alpha.deltaveleuler2(deltaT,tau);
