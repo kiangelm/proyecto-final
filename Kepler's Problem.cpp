@@ -28,7 +28,7 @@ int main(void)
   planet alpha = et;
   planet beta = marte;
   //ofstream objects
-  std::string filename[3] = { "Eulerbeta.txt","Implisitbeta.txt","Velverbeta.txt"};
+  std::string filename[3] = { "Euleralpha.txt","Implisitalpha.txt","Velveralpha.txt"};
 	std::ofstream outputFile[3];
 	for (int i = 0; i < 3; i++)
 	{
@@ -52,33 +52,40 @@ int main(void)
 //metodo de euler implicito
   for(double time=0.0; time<=10 ; time+=deltaT){
 
-    //Comentadas las lineas para evitar al planeta "Marte moverse"
+    //Comentadas las lineas para evitar al planeta "Marte moverse
     planet tau=alpha;
     tau.deltaforce(beta);
+    tau.deltaveleuler(deltaT);
+    tau.deltaposeuler(deltaT);
+    alpha.midpoint(deltaT,tau);
     alpha.deltaforce(beta);
-    tau.velmidpoint(deltaT,alpha);//Procedimiento  realizado para encontrar la velocidad media
-    alpha.deltaposeuler(deltaT);
+    alpha.deltaposeuler2(deltaT,tau);
+    
+    
     //    alpha.deltaveleuler2(deltaT,tau);
     alpha.invariant();
     alpha.T=time;
     outputFile[1] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
-                  << "\t" << alpha.H << "\t" << alpha.L << "\t"
-                  << alpha.A.x << "\t" << alpha.A.y << "\n";;
+		  << "\t" << alpha.H << "\t" << alpha.L << "\t"
+     << alpha.A.x << "\t" << alpha.A.y << "\n";;
   }
+  alpha=et;
+  beta=marte;
 //metodo storm velvet
 for(double time=0.0; time<=10 ; time+=h){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
-  alpha.deltaforce(beta);
+ 
+   outputFile[2] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
+                  << "\t" << alpha.H << "\t" << alpha.L << "\t"
+                  << alpha.A.x << "\t" << alpha.A.y << "\n";;
+   alpha.deltaforce(beta);
   alpha.initintegrationverlet(h);
   alpha.deltaposstromerverlet(h);
   alpha.deltaforce(beta);
   alpha.deltavelstromerverlet(h);
   alpha.invariant();
-   outputFile[2] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
-                  << "\t" << alpha.H << "\t" << alpha.L << "\t"
-                  << alpha.A.x << "\t" << alpha.A.y << "\n";;
-  
+  alpha.T=time;
 }
 }
   
