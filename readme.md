@@ -1,7 +1,8 @@
 # PROYECTO FINAL PROGRAMACI√ìN: Problema de Kepler
 
-## Introducci√≥n
-El siguiente trabajo tiene como objetivo solucionar el problema de Kepler, el cual  consiste en dos cuerpos que se atraen gravitacionalmente y debemos hallar sus √≥rbitas, para este fin crearemos una librer√≠a que nos ayudar√° a tener una mejor manejo e incluso aumentar la dificultad del problema, todo mediante el empleo de programaci√≥n orientada a objetos.
+## IntroducciÛn
+El siguiente trabajo tiene como objetivo solucionar el problema de Kepler, el cual  consiste en dos cuerpos que se atraen gravitacionalmente y debemos hallar sus Ûrbitas, para este fin crearemos una librerÌa que nos ayudar· a tener una mejor manejo e incluso aumentar la dificultad del problema, todo mediante el empleo de programaciÛn orientada a objetos. El problema se resolver· mediante tres mÈtodos: mÈtodo de euler, mÈtodo implÌcito del punto medio y
+mÈtodo de Stormer-Verlet; al final concluiremos cu·l mÈtodo fue el m·s Ûptimo y eficaz.
 
 ## Integrantes
 * Karen I √Ångel M
