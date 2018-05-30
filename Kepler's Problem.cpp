@@ -36,7 +36,7 @@ int main(void)
 		outputFile[i].open(filename[i].c_str());
 	}
 //metodo de euler
-  for(double time=0.0; time<=10 ; time+=deltaT){
+  for(double time=0.0; time<=20*m_PI ; time+=deltaT){
 
     alpha.deltaforce(beta);
     alpha.deltaveleuler (deltaT);
@@ -53,8 +53,8 @@ int main(void)
 //metodo de euler implicito
   for(double time=0.0; time<=20*M_PI ; time+=deltaT){
     alpha.deltaforce(beta);
-    alpha.velmidpoint(deltaT);
     alpha.deltaposeuler2(deltaT);
+    alpha.velmidpoint(deltaT);
     alpha.deltaveleuler(deltaT);
     //Comentadas las lineas para evitar al planeta "Marte moverse
     //alpha.deltaveleuler2(deltaT,tau);
