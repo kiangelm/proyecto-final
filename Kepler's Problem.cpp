@@ -53,8 +53,8 @@ int main(void)
 //metodo de euler implicito
   for(double time=0.0; time<=20*M_PI ; time+=deltaT){
     alpha.deltaforce(beta);
-    alpha.deltaposeuler2(deltaT);
     alpha.velmidpoint(deltaT);
+    alpha.deltaposeuler2(deltaT);
     alpha.deltaveleuler(deltaT);
     //Comentadas las lineas para evitar al planeta "Marte moverse
     //alpha.deltaveleuler2(deltaT,tau);
