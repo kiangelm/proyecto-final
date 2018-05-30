@@ -70,8 +70,9 @@ void planet::deltaposeuler2(double t)
 }
 void planet::velmidpoint (double t)
 {
-  velant.x=vel.x+t*force.x/(2);
-  velant.y=vel.y+t*force.y/(2);
+  velant.x=vel.x+force.x*t/2;
+  velant.y=vel.y+t*force.y/2;
+  
 }
 void planet::invariant ()
 {
