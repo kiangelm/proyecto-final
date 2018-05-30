@@ -10,7 +10,7 @@ int main(void)
   double h=0.005;
   double hb=0.05;
   planet et;
-  et.mass=80;
+  et.mass=1;
   et.pos.x=0.4;
   et.pos.y=0.0;
   et.vel.x=0.0;
@@ -19,7 +19,7 @@ int main(void)
   et.force.y=0.0;
 
   planet marte;
-  marte.mass=9000;
+  marte.mass=1;
   marte.pos.x=0.0;
   marte.pos.y=0.0;
   marte.vel.x=0.0;
@@ -51,10 +51,10 @@ int main(void)
   beta = marte;
 
 //metodo de euler implicito
-  for(double time=0.0; time<=10 ; time+=deltaT){
+  for(double time=0.0; time<=20*M_PI ; time+=deltaT){
     alpha.deltaforce(beta);
-    alpha.velmidpoint(deltaT);
     alpha.deltaposeuler2(deltaT);
+    alpha.velmidpoint(deltaT);
     alpha.deltaveleuler(deltaT);
     //Comentadas las lineas para evitar al planeta "Marte moverse
     //alpha.deltaveleuler2(deltaT,tau);
@@ -67,7 +67,7 @@ int main(void)
   alpha=et;
   beta=marte;
 //metodo storm velvet
-for(double time=0.0; time<=10 ; time+=h){
+for(double time=0.0; time<=20*M_PI ; time+=h){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
 
@@ -82,7 +82,7 @@ for(double time=0.0; time<=10 ; time+=h){
   alpha.invariant();
   alpha.T=time;
 }
-for(double time=0.0; time<=10 ; time+=hb){
+for(double time=0.0; time<=20*M_PI ; time+=hb){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
 
