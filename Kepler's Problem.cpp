@@ -8,6 +8,7 @@ int main(void)
 {
   double deltaT = 0.0005;
   double h=0.005;
+  double hb=0.05;
   planet et;
   et.mass=80;
   et.pos.x=0.4;
@@ -28,9 +29,9 @@ int main(void)
   planet alpha = et;
   planet beta = marte;
   //ofstream objects
-  std::string filename[3] = { "Euleralpha.txt","Implisitalpha.txt","Velveralpha.txt"};
-	std::ofstream outputFile[3];
-	for (int i = 0; i < 3; i++)
+  std::string filename[4] = { "Euler.txt","Implisit.txt","Velvet10.txt", "Velvet100.txt"};
+	std::ofstream outputFile[4];
+	for (int i = 0; i < 4; i++)
 	{
 		outputFile[i].open(filename[i].c_str());
 	}
@@ -55,15 +56,12 @@ int main(void)
     alpha.velmidpoint(deltaT);
     alpha.deltaposeuler2(deltaT);
     alpha.deltaveleuler(deltaT);
-    
     //Comentadas las lineas para evitar al planeta "Marte moverse
-    
-    
-    //    alpha.deltaveleuler2(deltaT,tau);
+    //alpha.deltaveleuler2(deltaT,tau);
     alpha.invariant();
     alpha.T=time;
-    outputFile[1] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
-		  << "\t" << alpha.H << "\t" << alpha.L << "\t"
+    outputFile[1] << alpha.T << "\t" << alpha.pos.x << "\t" << alpha.pos.y
+		 << "\t" << alpha.H << "\t" << alpha.L << "\t"
      << alpha.A.x << "\t" << alpha.A.y << "\n";;
   }
   alpha=et;
@@ -72,11 +70,26 @@ int main(void)
 for(double time=0.0; time<=10 ; time+=h){
 
   //Comentadas las lineas para evitar al planeta "Marte moverse"
- 
-   outputFile[2] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
-                  << "\t" << alpha.H << "\t" << alpha.L << "\t"
-                  << alpha.A.x << "\t" << alpha.A.y << "\n";;
-   alpha.deltaforce(beta);
+
+  outputFile[2] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
+                << "\t" << alpha.H << "\t" << alpha.L << "\t"
+                << alpha.A.x << "\t" << alpha.A.y << "\n";;
+  alpha.deltaforce(beta);
+  alpha.initintegrationverlet(h);
+  alpha.deltaposstromerverlet(h);
+  alpha.deltaforce(beta);
+  alpha.deltavelstromerverlet(h);
+  alpha.invariant();
+  alpha.T=time;
+}
+for(double time=0.0; time<=10 ; time+=hb){
+
+  //Comentadas las lineas para evitar al planeta "Marte moverse"
+
+  outputFile[3] << alpha.T << "\t"<< alpha.pos.x << "\t" << alpha.pos.y
+                << "\t" << alpha.H << "\t" << alpha.L << "\t"
+                << alpha.A.x << "\t" << alpha.A.y << "\n";;
+  alpha.deltaforce(beta);
   alpha.initintegrationverlet(h);
   alpha.deltaposstromerverlet(h);
   alpha.deltaforce(beta);
@@ -85,4 +98,3 @@ for(double time=0.0; time<=10 ; time+=h){
   alpha.T=time;
 }
 }
-  
